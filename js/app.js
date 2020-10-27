@@ -22,7 +22,7 @@ let sections = document.querySelectorAll('section');
 // bar
 for(i = 0 ; i < 4; i++){
     let a = document.createElement('a');
-    a.setAttribute('href', '#' + sections[i].id);
+    a.setAttribute('href', 'javascript:void(0)');
     a.setAttribute('id' , 'but' + (i + 1));
     a.innerText = `Sectan ${i+1}`;
     let orderlist = document.createElement('li');
@@ -44,30 +44,41 @@ const header = document.querySelector('.page__header');
  * End Global Variables
  * Start Helper Functions
  * 
-*/
+ */
 
 /**
  * End Helper Functions
  * Begin Main Functions
  * 
-*/
+ */
+let removeClass = () =>{
+    for(i = 0 ; i < 4 ; i++){sections[i].classList.remove('your-active-class')}
+}
 let addClass = (input) => {
-    // Add class 'active' to section when near top of viewport
-    sections[input].classList.add('your-active-class');
-    // Scroll to section on link click
+    sections[input].classList.add('your-active-class'); 
+    sections[input].scrollIntoView({behavior : 'smooth'})
+    
 }
 
-but1.addEventListener('click', () => addClass(0));
-but2.addEventListener('click', () => addClass(1));
-but3.addEventListener('click', () => addClass(2));
-but4.addEventListener('click', () => addClass(3));
 
 /**
  * End Main Functions
  * Begin Events
  * 
-*/
+ */
 
+but1.addEventListener('click', () => {
+    removeClass();
+    addClass(0);});
+but2.addEventListener('click', () => {
+    removeClass();
+    addClass(1);});
+but3.addEventListener('click', () => {
+    removeClass();
+    addClass(2);});
+but4.addEventListener('click', () => {
+    removeClass();
+    addClass(3);});
 
 
 
@@ -79,18 +90,18 @@ document.addEventListener('scroll', () => {
     let oldScroll = window.scrollY;
     if (oldScroll > 0) {
         setTimeout(() => {
-
+            
             if (oldScroll == window.scrollY) {
                 header.classList.add('fade-out');
 
             } else {
                 oldScroll = window.scrollY;
                 header.classList.remove('fade-out');
-
+                
             }
-
+            
         }, 100);
-
+        
     }
 
     if (window.scrollY > header.scrollHeight) {
@@ -103,21 +114,21 @@ document.addEventListener('scroll', () => {
         let navLink = section.dataset.navLink;
 
         let rect = section.getBoundingClientRect();
-
+        
         let isInViewport = rect.top >= 0 && rect.left >= 0 && rect.bottom <= window.innerHeight && rect.right <= window.innerWidth;
-
+        
+        
         if (isInViewport) {
-
+            removeClass();
             addClass(index)
             document.querySelectorAll('.menu__link').forEach(link => {
                 link.classList.remove('active')
+
             })
 
             document.querySelector(navLink).classList.add('active')
-        } else {
-            document.querySelector(navLink).classList.remove('active')
-
-        }
+        } 
+        
     });
 });
 
