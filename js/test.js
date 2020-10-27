@@ -22,7 +22,7 @@ let sections = document.querySelectorAll('section');
 // bar
 for(i = 0 ; i < 4; i++){
     let a = document.createElement('a');
-    a.setAttribute('href', '#');
+    a.setAttribute('href', 'javascript:void(0)');
     a.setAttribute('id' , 'but' + (i + 1));
     a.innerText = `Sectan ${i+1}`;
     let orderlist = document.createElement('li');
@@ -56,7 +56,7 @@ let removeClass = () =>{
 }
 let addClass = (input) => {
     sections[input].classList.add('your-active-class'); 
-    sections[input].scrollIntoView({behavioru : 'smooth'})
+    sections[input].scrollIntoView({behavior : 'smooth'})
     console.log(sections[input].scrollIntoView({behavior : 'smooth'}));
     console.log(sections[input]);
     console.log(sections[input].scrollIntoView);
